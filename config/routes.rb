@@ -1,6 +1,6 @@
 Myapp::Application.routes.draw do
   get "pages/index"
-  get "/project0"    => "rails/welcome#index"
+  get "/pages/project_2"    => "pages#project_2"
   root :to               => "pages#home"
 
   # The priority is based upon order of creation: first created -> highest priority.

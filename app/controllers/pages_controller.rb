@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
   end
-  def project0
+  def project_2
   end
 end
