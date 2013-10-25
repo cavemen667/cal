@@ -1,10 +1,9 @@
 Myapp::Application.routes.draw do
   get "pages/index"
-  #get "calendar" => "calendar#index"
+  get "calendar" => "calendar#index"
   get "pages/project_2"    => "pages#project_2"
   root :to               => "pages#home"
 
-get '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

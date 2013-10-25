@@ -47,7 +47,7 @@ gem "twitter-bootstrap-rails"
 
 
 # Calendar
-gem 'event-calendar', :require => 'event_calendar'
+# gem 'event-calendar', :require => 'event_calendar'
 
 
 #gem "twitter-bootstrap-rails", :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
