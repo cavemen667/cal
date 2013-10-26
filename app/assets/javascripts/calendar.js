@@ -23,9 +23,15 @@ var month_array = new Array("January",
 			"November",
 			"December");
 
-
 var current_month = month_array[current_date.getMonth()];
 var current_year = current_date.getFullYear();
+
+/*
+=================================================================
+  helper functions
+=================================================================
+*/
+
 
 function getStartDay(month, year){
   var d = new Date(year, month, 1);
@@ -83,6 +89,15 @@ function checkWindowSize(isResize){
   }
 }
 
+function closePopup(){
+  $('#popup').animate({opacity: '0'}, 'fast');
+  $('#popup').css({'display':'none'});
+}
+/*
+=================================================================
+ -refresh() updates the calendar
+=================================================================
+*/
 function refresh(){
 
   var start_day = getStartDay(current_date.getMonth(),current_date.getFullYear());
@@ -180,7 +195,8 @@ $("#getLastYear").click(function(){
   refresh();
 });
 
- $("#cal_table tr").find("td").click(function(e){
+
+ $(".dates").parent("td").click(function(e){
    var popup_height = $("#popup").height();
    var popup_width = $("#popup").width();
    var x = e.pageX - popup_width/2;
@@ -196,12 +212,18 @@ $("#getLastYear").click(function(){
      y = 0;
    }
    $("#popup").css({'display': 'block', 'left': ''+x+'px', 'top': ''+y+'px'});
-   $("#popup").html('<span>When: '+current_month+' '+$(this).text()+', '+current_year+'</span><br>'+
-                    '<span>What: </span><input type="text" name="eventname"></input><br>'+
-                    '<button type="button" class="css3button">Create</button>'
-
+   $("#popup").animate({opacity: '1'}, 'fast');
+   $("#popup").html('<button type="button" class="close_btn"'+
+                    'onclick="closePopup()">X</button>'+
+                    '<span><form>When: '+current_month+' '+$(this).text()+', '+
+                     current_year+'<br>What: '+
+                    '<input type="text" name="eventname" size="30"></input>'+
+                    '<br>'+
+                    '<button type="button" class="css3button">Create</button>'+
+                    '</form></span>'
    );
   });
+
 
 checkWindowSize(false);
 
