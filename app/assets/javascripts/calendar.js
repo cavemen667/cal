@@ -148,8 +148,8 @@ function refresh(){
 	'</tr></thead>'+
 	'<tbody>'+
 	tr +
-	'</tbody>'+
-    '</table><div id="popup"><span id="popup_text"></span></div>'
+	'</tbody></table>'
+//    '</table><div id="popup"><span id="popup_text"></span></div>'
     )
     tmp_id = 0;
 $("#cal_table tr").find('td').each(function(){
@@ -200,7 +200,7 @@ $("#getLastYear").click(function(){
    var popup_height = $("#popup").height();
    var popup_width = $("#popup").width();
    var x = e.pageX - popup_width/2;
-   var y = e.pageY - popup_height;
+   var y = e.pageY - popup_height/2;
 
    if ( $(window).width() < x+popup_width){
      x = $(window).width() - popup_width;
@@ -211,17 +211,14 @@ $("#getLastYear").click(function(){
    if ( y < 0){
      y = 0;
    }
+   $("#when_text").text(''+current_month+' '+ $(this).text()+', '+current_year);
+   $("#popup").find("input[type=text], input[type=date],"+
+                    "input[type=time], textarea").val('');
+   $("#popup").find('input[type=date]').val(''+
+                    current_month+' '+ $(this).text()+', '+current_year);
    $("#popup").css({'display': 'block', 'left': ''+x+'px', 'top': ''+y+'px'});
    $("#popup").animate({opacity: '1'}, 'fast');
-   $("#popup").html('<button type="button" class="close_btn"'+
-                    'onclick="closePopup()">X</button>'+
-                    '<span><form>When: '+current_month+' '+$(this).text()+', '+
-                     current_year+'<br>What: '+
-                    '<input type="text" name="eventname" size="30"></input>'+
-                    '<br>'+
-                    '<button type="button" class="css3button">Create</button>'+
-                    '</form></span>'
-   );
+
   });
 
 
@@ -237,6 +234,12 @@ checkWindowSize(false);
 }
 
 $(document).ready(function(){
+
+   $("#popup").prepend('<button type="button" class="close_btn"'+
+                    'onclick="closePopup()">X</button>'+
+                    '<span id="when_text"></span>'
+   );
+
 
 refresh();
 checkWindowSize(false);

@@ -1,0 +1,22 @@
+// Place all the styles related to the events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#event_title label, #event_time label{
+  width: 3em;
+  float:left;
+  text-align: left;
+  margin-right:0.2em;
+  display: block
+}
+
+#event_title, #event_time{
+  width: 160px;
+}
+textarea {
+  resize:none;
+}
+
+#date_field{
+  display:none;
+}

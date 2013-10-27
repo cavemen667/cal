@@ -1,4 +1,6 @@
 Myapp::Application.routes.draw do
+  resources :events
+
   get "pages/index"
   get "calendar" => "calendar#index"
   get "pages/project_2"    => "pages#project_2"
