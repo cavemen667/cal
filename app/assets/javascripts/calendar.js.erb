@@ -73,9 +73,13 @@ function checkWindowSize(isResize){
     if (w > 50 && h>50){
       $('.cells').animate({width: ''+(w-190)/7+'px',
       height: ''+(h-200)/8+'px'}, 'fast');
+      $('.other_cells').animate({width: ''+(w-190)/7+'px',
+      height: ''+(h-200)/8+'px'}, 'fast');
+
       $('#display_month').animate({width: ''+(w-190)/7+'px'}, 'fast');
     } else if (h > 50) {
       $('.cells').animate({height: ''+(h-200)/8+'px'},'fast');
+      $('.other_cells').animate({height: ''+(h-200)/8+'px'},'fast');
     } else if (w > 50) {
      $('.cells').animate({width: ''+(w-190)/7+'px'}, 'fast');
     }
@@ -85,6 +89,7 @@ function checkWindowSize(isResize){
       $('#display_month').css('width', (w-190)/7);
     } if (h > 50){
       $('.cells').css('height', (h-200)/8);
+      $('.other_cells').css('height', (h-200)/8);
     }
   }
 }
@@ -105,6 +110,7 @@ function refresh(){
   var prev_end_day =  getEndDay(getPrevMonth(current_date.getMonth()),
                                              current_date.getFullYear());
   var day = 1;
+  var event_day = 1;
   var isNextMonth = false; 
   var tr = '';
   var th = '';
@@ -122,9 +128,8 @@ function refresh(){
     td = '';
   }
   $("#calendar").html(
-    '<p>My calendar</p>'+ 
+    '<h2>My Calendar</h2>'+ 
     '<table id="cal_menu_table"><tr>'+
-
     '<td><div id="getLastYear" class="date_nav">'+
     '<button type="button" class="css3button">&lt&lt</button>'+
     '</div></td>'+
@@ -152,25 +157,39 @@ function refresh(){
 //    '</table><div id="popup"><span id="popup_text"></span></div>'
     )
     tmp_id = 0;
-$("#cal_table tr").find('td').each(function(){
+$("#cal_table tr").children('td').each(function(){
     
     if (start_day == 0 && end_day >= day && !isNextMonth){
-      $(this).html("<pan class = 'dates'>"+day++ +"</pan>");
+      $(this).html("<a class = 'dates' name = '"+day+"'>"+day++ +"</a>");
+      $(this).append("<div id = 'div_cell"+tmp_id++ +"'class = 'cells'><div>");
     } else if (start_day>0){
       start_day--;
       var prev_dates = prev_end_day-start_day;
-      $(this).html("<pan class = 'other_dates'>"+prev_dates+"</pan>");
+      $(this).html("<span class = 'other_dates'>"+prev_dates+"</span>");
+      $(this).append("<div class = 'other_cells'><div>");
     } else if (isNextMonth){
-      $(this).html("<pan class = 'other_dates'>"+day++ +"</pan>");
+      $(this).html("<span class = 'other_dates'>"+day++ +"</span>");
+      $(this).append("<div class = 'other_cells'><div>");
     } else {
       day = 1;
       isNextMonth = true;
-      $(this).html("<pan class = 'other_dates'>"+day++ +"</pan>");
+      $(this).html("<span class = 'other_dates'>"+day++ +"</span>");
+      $(this).append("<div class = 'other_cells'><div>");
     }
-    $(this).append("<div id = 'div_cell"+tmp_id++ +"'class = 'cells'><div>");
     $('.dates').animate({opacity:'1'});
     $('.other_dates').animate({opacity:'1'});
-  });  
+    var cday= ''+current_year+(current_date.getMonth()+1)+(day-1);
+      <% Event.all.each do |ev| %>
+      if ( cday == <%= ev.date.strftime('%Y%-m%-d') %>){
+         $(this).find('.cells').append('<a><%= ev.title %>-'+
+                        '<%= ev.time.strftime("%l:%M %P")%></a><br>');
+      }
+      <% end %>
+  });
+
+$("#cal_table tr td").children('.dates').siblings('.cells').each(function(){
+});  
+
 
 $("#getLastMonth").click(function(){
   current_date.setMonth(current_date.getMonth()-1);
@@ -211,16 +230,19 @@ $("#getLastYear").click(function(){
    if ( y < 0){
      y = 0;
    }
-   $("#when_text").text(''+current_month+' '+ $(this).text()+', '+current_year);
+   $("#when_text").text(''+current_month+' '+ $(this).children().attr('name')+', '+current_year);
    $("#popup").find("input[type=text], input[type=date],"+
                     "input[type=time], textarea").val('');
    $("#popup").find('input[type=date]').val(''+
                     current_month+' '+ $(this).text()+', '+current_year);
    $("#popup").css({'display': 'block', 'left': ''+x+'px', 'top': ''+y+'px'});
    $("#popup").animate({opacity: '1'}, 'fast');
+   
 
   });
+$('form').submit(function(){
 
+});
 
 checkWindowSize(false);
 
@@ -234,7 +256,6 @@ checkWindowSize(false);
 }
 
 $(document).ready(function(){
-
    $("#popup").prepend('<button type="button" class="close_btn"'+
                     'onclick="closePopup()">X</button>'+
                     '<span id="when_text"></span>'

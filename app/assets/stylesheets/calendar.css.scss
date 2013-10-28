@@ -6,6 +6,7 @@ $grey_scale_2: #f0f0f0;
 $grey_scale_3: #fafafa;
 $grey_scale_4: #c3c3c3; 
 $grey_scale_5: #a1a1a1;
+$dark_blue: #0B0B3B;
 
 #cal_table, #cal_table td, #cal_table th {
   border-collapse: collapse;
@@ -13,7 +14,6 @@ $grey_scale_5: #a1a1a1;
   background: $grey_scale_1;
   border: 1px solid $grey_scale_5; 
 }
-
 
 
 #cal_table th{
@@ -64,13 +64,25 @@ $grey_scale_5: #a1a1a1;
 }
 
 .dates {
- font-size:10px;
- opacity: 0;
+  font-size:10px;
+  color: BLACK;
+  opacity: 0;
+}
+.dates:hover, .dates:focus{ 
+  cursor: pointer;
 }
 
-.cells{
- color:$grey_scale_2;
+.cells:hover, .cells:focus{
+  cursor: pointer;
+}
+
+.cells, .other_cells{
+ color: $dark_blue;
  min-width: 20px;
+}
+
+.cells a{ 
+  font-size: 11px;
 }
 
 .other_dates {

@@ -11,14 +11,13 @@
   <% @posts.each do |post| %>
     <tr>
       <td><%= post.title %></td>
-      <td><%= post.time.strftime("%l:%M %P") %></td>
+      <td><%= post.time %></td>
       <td><%= post.text %></td>
       <td><%= post.date %></td>
       <td><%= link_to 'Show', event_path(post) %></td>
       <td><%= link_to 'Edit', edit_event_path(post) %></td>
       <td><%= link_to 'Destroy', event_path(post),
-                     method: :delete, data: { confirm: 'Are you 
-sure?' } %></td>
+                     method: :delete %></td>
     </tr>
   <% end %>
 </table>

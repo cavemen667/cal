@@ -4,16 +4,15 @@ class EventsController < ApplicationController
   end
 
   def index
-    @posts = Event.all
+    @posts = Event.all.order(:date)
   end
   
   def create
-    @post = Event.new(params[:event].permit(:title, :text, :time, :date))
-
+    @post = Event.new(post_params)
     if @post.save
-      redirect_to @post
+      redirect_to calendar_path
     else
-      render 'new'
+      render 'calendar/index'
     end
   end
 
@@ -28,7 +27,7 @@ class EventsController < ApplicationController
   
   def update
     @post = Event.find(params[:id])
-    if @post.update(params[:event].permit(:title, :text))
+    if @post.update(post_params)
       redirect_to @post
     else
       render 'edit'
@@ -43,7 +42,7 @@ class EventsController < ApplicationController
  
   private
     def post_params
-      params.require(:post).permit(:title, :text)
+      params.require(:event).permit(:title, :text, :time, :date)
     end
 
 end

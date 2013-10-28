@@ -1,5 +1,23 @@
 <%= javascript_include_tag "calendar" %>
+<% if @post.errors.any? %>
+  <div id="error_msg">
+    <h2><%= pluralize(@post.errors.count, "error") %></h2>
+    <br>
+    <% @post.errors.full_messages.each do |msg| %>
+      <%= msg %><br>
+    <% end %>
+  </div>
+<% end %>
+
 <div id="calendar"></div>
-<div id="popup"><span id="popup_text">
+
+<div id="event_list">
+</div>
+
+
+<!-- For popup form -->
+<div id="popup">
+<span id="popup_text">
 <%= render 'events/form' %>
-</span></div>
+</span>
+</div>

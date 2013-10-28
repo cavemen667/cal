@@ -1,26 +1,15 @@
 <%= form_for @post do |f| %>
-  <% if @post.errors.any? %>
-  <div id="errorExplanation">
-    <h2><%= pluralize(@post.errors.count, "error") %> prohibited
-      this post from being saved:</h2>
-    <ul>
-    <% @post.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
   <div>
     <span id="event_title">
       <%= f.label :title , "Event:" %>
-      <%= f.text_field :title, :class=>"form_fields" %><br>
+      <%= f.text_field :title  %>
     </span>
     <span id="event_time">
       <%= f.label :time , "Time:" %>
-      <%= f.time_field :time, :class=>"form_fields" %>
+      <%= f.time_field :time %>
     </span>
     <span id="event_description">
-      <%= f.label :text , "Description", :class=>"form_fields" %>
+      <%= f.label :text , "Description" %>
       <%= f.text_area :text %>
     </span>
    <span>
