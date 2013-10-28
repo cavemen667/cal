@@ -3,7 +3,5 @@ class CalendarController < ApplicationController
    @post = Event.new
   end
 
-  def create
-  end
 
 end
