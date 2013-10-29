@@ -1,4 +1,5 @@
-<%= form_for @post do |f| %>
+<%= form_for @post do |f|%>
+<span id="when_text"></span>
   <div>
     <span id="event_title">
       <%= f.label :title , "Event:" %>
@@ -8,7 +9,7 @@
       <%= f.label :time , "Time:" %>
       <%= f.time_field :time %>
     </span>
-    <span id="event_description">
+    <span id="event_description2">
       <%= f.label :text , "Description" %>
       <%= f.text_area :text %>
     </span>

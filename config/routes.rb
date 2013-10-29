@@ -1,8 +1,8 @@
 Myapp::Application.routes.draw do
   resources :events
-
+  resources :calendar
   get "pages/index"
-  get "calendar" => "calendar#index"
+#  get "calendar" => "calendar#index"
   get "pages/project_2"    => "pages#project_2"
   root :to               => "pages#home"
 

@@ -11,7 +11,7 @@
   <% @posts.each do |post| %>
     <tr>
       <td><%= post.title %></td>
-      <td><%= post.time %></td>
+      <td><%= post.time%></td>
       <td><%= post.text %></td>
       <td><%= post.date %></td>
       <td><%= link_to 'Show', event_path(post) %></td>

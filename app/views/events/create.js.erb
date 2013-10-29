@@ -1,3 +1,4 @@
+
 var current_date = new Date();
 var current_clicked_day= current_date.getDay();
 var total_rows = 6;
@@ -217,12 +218,7 @@ jQuery.ajaxSetup({
 })
 
 
-$("form").submit(function(){
-  $.post($(this).attr("action"), $(this).serialize(), null, "script");
-  closePopup();
-  return false;
 
-});
 
 
 
@@ -259,6 +255,7 @@ $("#event_form").submit(function(){
      y = 0;
    }
    current_clicked_day = $(this).text();
+   $("#when_text").val('');
    $("#when_text").html(''+current_month+' '+ $(this).children().attr('name')+', '+current_year);
    $("#popup").find("input[type=text], input[type=date],"+
                     "input[type=time], textarea").val('');
@@ -283,19 +280,6 @@ checkWindowSize(false);
 }
 
 $(document).ready(function(){
-if(document.URL.indexOf("#")==-1)
-{
-// Set the URL to whatever it was plus "#".
-url = document.URL+"#";
-location = "#";
-
-//Reload the page
-location.reload(true);
-
-}
-
-
-
    $("#popup").prepend('<button type="button" class="close_btn"'+
                     'onclick="closePopup()">X</button>'
 /*                    '<div>'+
@@ -327,6 +311,7 @@ location.reload(true);
 refresh();
 checkWindowSize(false);
 $(window).resize(checkWindowSize);
+
 });
 
 

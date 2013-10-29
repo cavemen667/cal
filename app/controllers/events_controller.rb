@@ -9,11 +9,17 @@ class EventsController < ApplicationController
   
   def create
     @post = Event.new(post_params)
+
+    respond_to do |format|
     if @post.save
-      redirect_to calendar_path
+      format.html {redirect_to @post}
+      format.js 
     else
-      render 'calendar/index'
+      format.html {render 'calendar/index'}
+      format.js  
     end
+    end
+   
   end
 
   def edit
