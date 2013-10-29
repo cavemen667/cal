@@ -11,13 +11,13 @@ class EventsController < ApplicationController
     @post = Event.new(post_params)
 
     respond_to do |format|
-    if @post.save
-      format.html {redirect_to @post}
-      format.js 
-    else
-      format.html {render 'calendar/index'}
-      format.js  
-    end
+      if @post.save
+        format.html {redirect_to @post}
+        format.js 
+      else
+        format.html {render 'calendar/index'}
+        format.js  
+      end
     end
    
   end

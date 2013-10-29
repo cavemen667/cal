@@ -214,7 +214,7 @@ $("#getLastYear").click(function(){
 });
 jQuery.ajaxSetup({
    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-})
+});
 
 
 $("form").submit(function(){
@@ -260,9 +260,8 @@ $("#event_form").submit(function(){
    }
    current_clicked_day = $(this).text();
    $("#when_text").html(''+current_month+' '+ $(this).children().attr('name')+', '+current_year);
-   $("#popup").find("input[type=text], input[type=date],"+
-                    "input[type=time], textarea").val('');
-   $("#popup").find('input[type=date]').val(''+
+   $("#popup").find("#event_title, #event_time, #date_field, textarea").val('');
+   $("#popup").find('#date_field').val(''+
                     current_month+' '+ $(this).text()+', '+current_year);
    $("#popup").css({'display': 'block', 'left': ''+x+'px', 'top': ''+y+'px'});
    $("#popup").animate({opacity: '1'}, 'fast');
@@ -283,18 +282,6 @@ checkWindowSize(false);
 }
 
 $(document).ready(function(){
-if(document.URL.indexOf("#")==-1)
-{
-// Set the URL to whatever it was plus "#".
-url = document.URL+"#";
-location = "#";
-
-//Reload the page
-location.reload(true);
-
-}
-
-
 
    $("#popup").prepend('<button type="button" class="close_btn"'+
                     'onclick="closePopup()">X</button>'
