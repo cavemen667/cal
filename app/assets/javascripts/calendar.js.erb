@@ -212,19 +212,6 @@ $("#getLastYear").click(function(){
   current_year = current_date.getFullYear();
   refresh();
 });
-jQuery.ajaxSetup({
-   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-});
-
-
-$("form").submit(function(){
-  $.post($(this).attr("action"), $(this).serialize(), null, "script");
-  closePopup();
-  return false;
-
-});
-
-
 
 /*
 $("#event_form").submit(function(){
@@ -282,6 +269,22 @@ checkWindowSize(false);
 }
 
 $(document).ready(function(){
+
+jQuery.ajaxSetup({
+   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+});
+
+$("form").submit(function(){
+  $.post($(this).attr("action"), $(this).serialize(), null, "script");
+  closePopup();
+  return false;
+
+});
+
+$('form').find("input[type=text], textarea").val("");
+
+window.onload = $("form").submit();
+
 
    $("#popup").prepend('<button type="button" class="close_btn"'+
                     'onclick="closePopup()">X</button>'
