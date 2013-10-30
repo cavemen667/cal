@@ -1,5 +1,3 @@
-
-var current_date = new Date();
 var current_clicked_day= current_date.getDay();
 var total_rows = 6;
 var total_cols = 7;
@@ -95,7 +93,17 @@ function checkWindowSize(isResize){
   }
 }
 
+function openPopup(){
+
+   $("#popup").html();
+   $("#popup").css({'display': 'block', 'left': ''+x+'px', 'top': ''+y+'px'});
+   $("#popup").animate({opacity: '1'}, 'fast');
+}
+
+
+
 function closePopup(){
+
   $('#popup').animate({opacity: '0'}, 'fast');
   $('#popup').css({'display':'none'});
 }
@@ -156,7 +164,7 @@ function refresh(){
 	tr +
 	'</tbody></table>'
 //    '</table><div id="popup"><span id="popup_text"></span></div>'
-    )
+    );
     tmp_id = 0;
 $("#cal_table tr").children('td').each(function(){
     
@@ -182,7 +190,7 @@ $("#cal_table tr").children('td').each(function(){
     var cday= ''+current_year+(current_date.getMonth()+1)+(day-1);
       <% Event.all.each do |ev| %>
       if ( cday == <%= ev.date.strftime('%Y%-m%-d') %>){
-         $(this).find('.cells').append('<a><%= ev.title %></a><br>');
+         $(this).find('.cells').append('<a href="events/<%= ev.id %>"> <%= ev.title %></a><br>');
       }
       <% end %>
 });
@@ -217,28 +225,6 @@ jQuery.ajaxSetup({
    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 });
 
-
-
-
-
-
-/*
-$("#event_form").submit(function(){
-  $.ajax({
-      url: "/events",
-      type: "POST",
-     
-       data: {post: {title: ''+$("#event_title").val(),
-                      time: ''+$("#event_time").val(),
-                      text: ''+$("#event_description").text(),
-                      date: ''+ current_month+' '+ 
-                                current_clicked_day+', '+
-                                current_year}},
-      success: function(resp){}   
-   });
-});
-*/
-
  $(".dates").parent("td").click(function(e){
    var popup_height = $("#popup").height();
    var popup_width = $("#popup").width();
@@ -269,10 +255,9 @@ $("#event_form").submit(function(){
 
 checkWindowSize(false);
 
-  var time_check = new Date();
 //set current day to be grey
-  if (current_month == month_array[time_check.getMonth()] &&
-    current_year == time_check.getFullYear() ){
+  if (current_month == month_array[current_date.getMonth()] &&
+    current_year == current_date.getFullYear() ){
     $("#table_cell"+
        getCell_ID(current_date.getDate())).css("background-color","#c3c3c3");
   }
@@ -280,30 +265,8 @@ checkWindowSize(false);
 
 $(document).ready(function(){
    $("#popup").prepend('<button type="button" class="close_btn"'+
-                    'onclick="closePopup()">X</button>'
-/*                    '<div>'+
-                    '<form id="event_form">'+
-                    '<span>'+
-                    '<label for="title">Event:</label>'+
-                    '<input type="text" id="event_title" name="title">'+
-                    '</span>'+
-                    '<span>'+
-                    '<label for="time">Time:</label>'+
-                    '<input type="text" id="event_time" name="time">'+
-                    '</span>'+
-                    '<span>'+
-                    '<label for="description">Description:</label>'+
-                    '<textarea  id="event_description" ></textarea>'+
-                    '</span>'+
-                    '<span>'+
-                    '<input type="submit" id="new_event" value="Create event">'+
-                    '</span>'+
-                    '<span>'+
-                    '<input type="date" id="date_field"></input>'+
-                    '</span>'+
-                    '</form>'+
-                    '</div>'
-                   */
+                    'onclick="closePopup()">X</button>'+
+                    'span id="when_text"></span>'
    );
 
 
