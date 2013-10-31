@@ -1,38 +1,40 @@
 <%= javascript_include_tag 'calendar' %>
 <div>
-<div id="event_setter">
-<span>Time: 
-  <select id="hr_select">
-  <% (0..23).each do |h| %>
-    <option>
-      <span><%=h%></span>
-    </option>
-  <% end %>
-  </select>
-<span>:
-  <select id="min_select">  
-    <% (0..3).each do |m| %>
-    <option>
-      <span><%=m * 15%></span>
-    </option>
-      <% end %>
-  </select>
-</span>
-</div>
-<div>
-<span>Event:</span>
-<input type="text" id="in_event"></input>
+	<div id = "header">
+		<h2>My Calendar</h2>
+	</div>
+	<div>
+		<span>Time: 
+  			<select id="hr_select">
+  				<% (0..23).each do |h| %>
+    			<option>
+      				<span><%=h%></span>
+    			</option>
+  				<% end %>
+  			</select>
+		</span>
+		<span>:
+  			<select id="min_select">  
+    			<% (0..3).each do |m| %>
+    			<option>
+      				<span><%=m * 15%></span>
+    			</option>
+      			<% end %>
+  			</select>
+		</span>
+	</div>
+	<div>
+		<span>Event:</span>
+		<input type="text" id="in_event"></input>
+	</div>
 
-</div>
+	<div id="calendar"></div>
+	
+	<div id="event_list"></div>
 
-<div id="calendar"></div>
-
-<div id="event_list">
-</div>
-
-
-<div id="popup">
-<span id="popup_text">
-<%= render 'events/form' %>
-</span>
+	<div id="popup">
+		<span id="popup_text">
+			<%= render 'events/form' %>
+		</span>
+	</div>
 </div>

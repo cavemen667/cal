@@ -131,13 +131,12 @@ function refresh(){
   for (var i=0; i < total_rows; i++)
   {
     for (var k=0; k < total_cols; k++){
-      td += '<td id="table_cell'+tmp_id++ +'"></td>';
+      td += '<td id="table_cell'+tmp_id++ +'" class="table_cells"></td>';
     }
     tr += '<tr>'+ td + '</tr>';
     td = '';
   }
-  $("#calendar").html(
-    '<h2>My Calendar</h2>'+ 
+  $("#calendar").html( 
     '<table id="cal_menu_table"><tr>'+
     '<td><div id="getLastYear" class="date_nav">'+
     '<button type="button" class="css3button">&lt&lt</button>'+
@@ -198,6 +197,9 @@ $("#cal_table tr").children('td').each(function(){
 $("#cal_table tr td").children('.dates').siblings('.cells').each(function(){
 });  
 
+$(".cells a").click(function(){
+  closePopup();
+});
 
 
 $("#getLastMonth").click(function(){
@@ -269,10 +271,8 @@ $(".dates").parent("td").click(function(e){
 checkWindowSize(false);
 
 //set current day to be grey
-  if (current_month == month_array[current_date.getMonth()] &&
-    current_year == current_date.getFullYear() ){
-    $("#table_cell"+
-       getCell_ID(current_date.getDate())).css("background-color","#c3c3c3");
+  if (current_month == month_array[this_month] && current_year == current_date.getFullYear() ){
+    $("#table_cell"+getCell_ID(current_date.getDate())).css("background-color","#c3c3c3");
   }
 }
 

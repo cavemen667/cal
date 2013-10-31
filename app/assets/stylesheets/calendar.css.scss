@@ -8,6 +8,11 @@ $grey_scale_4: #c3c3c3;
 $grey_scale_5: #a1a1a1;
 $dark_blue: #0B0B3B;
 
+#header{
+	margin:auto;
+	width:100%;
+}
+
 #hr_select, #min_select{
   width: 50px;
 }
@@ -29,6 +34,10 @@ $dark_blue: #0B0B3B;
   border-collapse: collapse;
   //border: 1px solid $grey_scale_5; 
   background: $grey_scale_1;
+}
+
+#cal_table td:hover{
+  background-color: $grey_scale_2;
 }
 
 #cal_menu_table tbody{
@@ -71,9 +80,6 @@ $dark_blue: #0B0B3B;
 #event_title, #event_time{
   width: 160px;
 }
-
-
-
 .dates {
   font-size:10px;
   color: BLACK;
