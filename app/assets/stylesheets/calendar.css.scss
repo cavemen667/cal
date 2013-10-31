@@ -37,7 +37,7 @@ $highlight: #A9A9F5;
 #hr_select, #min_select{
   -webkit-appearance: none;
   width: 50px;
-  height: 20px;
+  height: 25px;
   padding: 0px;
   border: 1px solid #ccc;
 }
@@ -191,4 +191,6 @@ to {top: 0px;}
 
 @-webkit-keyframes mycal /* Safari and Chrome */
 {
+from  {top: -70px;}
+to {top: 0px;}
 }

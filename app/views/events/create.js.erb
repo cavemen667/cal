@@ -68,8 +68,10 @@ function getCell_ID(day){
 function checkWindowSize(isResize){
   var w = $(window).width();
   var h = $(window).height();
-  var w_cell = (w-185)/7;
-  var h_cell = (h-350)/6;
+  var w_cell = (w-200)/7;
+  var h_cell = (h-360)/6;
+
+
   if (isResize){
     if (w > 50 && h>50){
       $('.cells').animate({width: ''+w_cell+'px',
@@ -280,7 +282,7 @@ $(".dates").parent("td").click(function(e){
 checkWindowSize(false);
 
 //set current day to be grey
-  if (current_month == month_array[this_month] && current_year == current_date.getFullYear() ){
+  if (current_month == month_array[this_month] && current_year == this_year ){
     $("#table_cell"+getCell_ID(current_date.getDate())).css("background-color","#c3c3c3");
   }
 }
@@ -289,8 +291,8 @@ $(document).ready(function(){
 //    '</table><div id="popup"><span id="popup_text"></span></div>'
 $("#header").html('<%= escape_javascript(render ("calendar/header")) %>');
 
-   $("#popup").prepend('<button type="button" class="close_btn"'+
-                       'onclick="closePopup()">X</button>');
+$("#popup").prepend('<button type="button" class="close_btn"'+
+                    'onclick="closePopup()">X</button>');
 
 
 refresh();
