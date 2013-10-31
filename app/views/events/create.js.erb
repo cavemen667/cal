@@ -162,9 +162,8 @@ function refresh(){
 	'<tbody>'+
 	tr +
 	'</tbody></table>'
-//    '</table><div id="popup"><span id="popup_text"></span></div>'
     );
-    tmp_id = 0;
+  tmp_id = 0;
 $("#cal_table tr").children('td').each(function(){
     
     if (start_day == 0 && end_day >= day && !isNextMonth){
@@ -188,14 +187,14 @@ $("#cal_table tr").children('td').each(function(){
     $('.other_dates').animate({opacity:'1'});
     var cday= ''+current_year+(current_date.getMonth()+1)+(day-1);
       <% Event.all.each do |ev| %>
-      if ( cday == <%= ev.date.strftime('%Y%-m%-d') %>){
-         $(this).find('.cells').append('<a href="events/<%= ev.id %>"> <%= ev.title %></a><br>');
+      if (<%= ev.date %>!=""){
+         if ( cday == <%= ev.date.strftime('%Y%-m%-d') %>){
+            $(this).find('.cells').append('<a href="events/<%= ev.id %>"> <%= ev.title %></a><br>');
+         }
       }
       <% end %>
 });
 
-$("#cal_table tr td").children('.dates').siblings('.cells').each(function(){
-});  
 
 $(".cells a").click(function(){
   closePopup();
@@ -203,13 +202,21 @@ $(".cells a").click(function(){
 
 
 $("#getLastMonth").click(function(){
+  current_date.setDate(1);
   current_date.setMonth(current_date.getMonth()-1);
+  if (current_date.getMonth() == this_month){
+    current_date.setDate(this_date);
+  }
   current_year = current_date.getFullYear();
   current_month = month_array[current_date.getMonth()];
   refresh();
 });
 $("#getNextMonth").click(function(){
+  current_date.setDate(1);
   current_date.setMonth(current_date.getMonth()+1);
+  if (current_date.getMonth() == this_month){
+    current_date.setDate(this_date);
+  }
   current_year = current_date.getFullYear();
   current_month = month_array[current_date.getMonth()];
   refresh();
@@ -277,6 +284,7 @@ checkWindowSize(false);
 }
 
 $(document).ready(function(){
+//    '</table><div id="popup"><span id="popup_text"></span></div>'
    $("#popup").prepend('<button type="button" class="close_btn"'+
                        'onclick="closePopup()">X</button>');
 
