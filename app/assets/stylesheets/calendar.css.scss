@@ -8,12 +8,17 @@ $grey_scale_4: #c3c3c3;
 $grey_scale_5: #a1a1a1;
 $dark_blue: #0B0B3B;
 
+#hr_select, #min_select{
+  width: 50px;
+}
+
 #cal_table, #cal_table td, #cal_table th {
   border-collapse: collapse;
   padding: 5px 10px;
   background: $grey_scale_1;
   border: 1px solid $grey_scale_5; 
 }
+
 
 
 #cal_table th{

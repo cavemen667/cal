@@ -199,6 +199,7 @@ $("#cal_table tr td").children('.dates').siblings('.cells').each(function(){
 });  
 
 
+
 $("#getLastMonth").click(function(){
   current_date.setMonth(current_date.getMonth()-1);
   current_year = current_date.getFullYear();
@@ -221,36 +222,48 @@ $("#getLastYear").click(function(){
   current_year = current_date.getFullYear();
   refresh();
 });
+
 jQuery.ajaxSetup({
    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 });
 
- $(".dates").parent("td").click(function(e){
-   var popup_height = $("#popup").height();
-   var popup_width = $("#popup").width();
-   var x = e.pageX - popup_width/2;
-   var y = e.pageY - popup_height/2;
+$(".dates").parent("td").click(function(e){
+    $("#when_text").val('');
+    $("#when_text").html('' + current_month + ' ' + $(this).children().attr('name') + ', ' + current_year);
+    $("#popup").find("#event_title, #event_time, #date_field, textarea ").val('');
+    $("#popup").find('#date_field').val('' + current_month + ' ' + $(this).children().attr('name') + ', ' + current_year);
+    current_clicked_day = $(this).text();
+    
+    if($("#in_event").val() == ""){
+	var popup_height = $("#popup").height();
+	var popup_width = $("#popup").width();
+	var x = e.pageX - popup_width/2;
+	var y = e.pageY - popup_height/2;
 
-   if ( $(window).width() < x+popup_width){
-     x = $(window).width() - popup_width;
-   }
-   if ( x-popup_width/4 < 0){
-     x = 0;
-   }
-   if ( y < 0){
-     y = 0;
-   }
-   current_clicked_day = $(this).text();
-   $("#when_text").val('');
-   $("#when_text").html(''+current_month+' '+ $(this).children().attr('name')+', '+current_year);
-   $("#popup").find("#event_title, #event_time, #date_field, textarea ").val('');
-   $("#popup").find('#date_field').val(''+
-                    current_month+' '+ $(this).text()+', '+current_year);
-   $("#popup").css({'display': 'block', 'left': ''+x+'px', 'top': ''+y+'px'});
-   $("#popup").animate({opacity: '1'}, 'fast');
-   
-
-  });
+	if($(window).width() < x + popup_width){
+	    x = $(window).width() - popup_width;
+	}
+	
+	if(x-popup_width/4 < 0){
+	    x = 0;
+	}
+	
+	if(y < 0){
+	    y = 0;
+	}
+	
+	$("#popup").css({'display': 'block', 'left': '' + x + 'px', 'top': '' + y + 'px'});
+	$("#popup").animate({opacity: '1'}, 'fast');
+    }
+    else{
+	$("#event_title input").val($("#in_event").val());
+	$("#event_time input").val($("#hr_select").val() + ":" + $("#min_select").val());
+	$("#new_event").submit();
+	$("#hr_select").val("0");
+	$("#min_select").val("0");
+	$("#in_event").val("");
+    }
+});
 
 
 checkWindowSize(false);
@@ -265,9 +278,7 @@ checkWindowSize(false);
 
 $(document).ready(function(){
    $("#popup").prepend('<button type="button" class="close_btn"'+
-                    'onclick="closePopup()">X</button>'+
-                    '<span id="when_text"></span>'
-   );
+                       'onclick="closePopup()">X</button>');
 
 
 refresh();
@@ -275,6 +286,4 @@ checkWindowSize(false);
 $(window).resize(checkWindowSize);
 
 });
-
-
 
