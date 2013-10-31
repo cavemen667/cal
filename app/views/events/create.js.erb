@@ -68,27 +68,29 @@ function getCell_ID(day){
 function checkWindowSize(isResize){
   var w = $(window).width();
   var h = $(window).height();
+  var w_cell = (w-185)/7;
+  var h_cell = (h-350)/6;
   if (isResize){
     if (w > 50 && h>50){
-      $('.cells').animate({width: ''+(w-190)/7+'px',
-      height: ''+(h-200)/8+'px'}, 'fast');
-      $('.other_cells').animate({width: ''+(w-190)/7+'px',
-      height: ''+(h-200)/8+'px'}, 'fast');
+      $('.cells').animate({width: ''+w_cell+'px',
+      height: ''+h_cell+'px'}, 'fast');
+      $('.other_cells').animate({width: ''+w_cell+'px',
+      height: ''+h_cell+'px'}, 'fast');
 
-      $('#display_month').animate({width: ''+(w-190)/7+'px'}, 'fast');
+      $('#display_month').animate({width: ''+w_cell+'px'}, 'fast');
     } else if (h > 50) {
-      $('.cells').animate({height: ''+(h-200)/8+'px'},'fast');
-      $('.other_cells').animate({height: ''+(h-200)/8+'px'},'fast');
+      $('.cells').animate({height: ''+h_cell+'px'},'fast');
+      $('.other_cells').animate({height: ''+h_cell+'px'},'fast');
     } else if (w > 50) {
-     $('.cells').animate({width: ''+(w-190)/7+'px'}, 'fast');
+     $('.cells').animate({width: ''+w_cell+'px'}, 'fast');
     }
   } else {
     if (w > 50){
-      $('.cells').css('width', (w-190)/7);
-      $('#display_month').css('width', (w-190)/7);
+      $('.cells').css('width', w_cell);
+      $('#display_month').css('width', w_cell);
     } if (h > 50){
-      $('.cells').css('height', (h-200)/8);
-      $('.other_cells').css('height', (h-200)/8);
+      $('.cells').css('height', h_cell);
+      $('.other_cells').css('height', h_cell);
     }
   }
 }
@@ -183,7 +185,7 @@ $("#cal_table tr").children('td').each(function(){
       $(this).html("<span class = 'other_dates'>"+day++ +"</span>");
       $(this).append("<div class = 'other_cells'><div>");
     }
-    $('.dates').animate({opacity:'1'});
+    $('.dates').css({opacity:'1'});
     $('.other_dates').animate({opacity:'1'});
     var cday= ''+current_year+(current_date.getMonth()+1)+(day-1);
       <% Event.all.each do |ev| %>
@@ -285,6 +287,8 @@ checkWindowSize(false);
 
 $(document).ready(function(){
 //    '</table><div id="popup"><span id="popup_text"></span></div>'
+$("#header").html('<%= escape_javascript(render ("calendar/header")) %>');
+
    $("#popup").prepend('<button type="button" class="close_btn"'+
                        'onclick="closePopup()">X</button>');
 

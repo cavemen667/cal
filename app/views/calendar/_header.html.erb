@@ -1,0 +1,47 @@
+
+<table id="header_table">
+        <td>
+	<table>
+		<tr>
+		<td><span>Time:</span> </td>
+                <td><span>
+                        <select id="hr_select">
+                        <% (0..23).each do |h| %>
+                        <option>
+                        <% if h < 10 %>
+                        <span>0<%=h%></span>
+                        <% else %>
+                        <span><%=h%></span>
+                        <% end %>
+                        </option>
+                        <% end %>
+                        </select>:
+                        <select id="min_select">  
+                        <% (0..11).each do |m| %>
+                        <option>
+                        <% if m*5 < 10 %>
+                        <span>0<%=m*5%></span>
+                        <% else %>
+                        <span><%=m*5%></span>
+                        <% end %>
+                        </option>
+                        <% end %>
+                        </select>
+                </span></td>
+                </tr>
+                <tr>
+                <td><span>Event:</span></td>
+                <td><input type="text" id="in_event"></input></td>
+                </tr>
+                <td>
+
+                </td>
+        </table>
+        </td>
+        <td>
+                <div id = "page_name">
+                        <h1>My Calendar</h1>
+                </div>
+        </td>
+</table>
+

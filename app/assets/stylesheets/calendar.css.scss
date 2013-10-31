@@ -1,21 +1,55 @@
 // Place all the styles related to the calendar controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-$grey_scale_1: #fefefe;
-$grey_scale_2: #f0f0f0;
-$grey_scale_3: #fafafa;
-$grey_scale_4: #c3c3c3; 
-$grey_scale_5: #a1a1a1;
+$grey_scale_1: #FEFEFE;
+$grey_scale_2: #F0F0F0;
+$grey_scale_3: #FAFAFA;
+$grey_scale_4: #C3C3C3; 
+$grey_scale_5: #A1A1A1;
 $dark_blue: #0B0B3B;
 
+$highlight: #A9A9F5;
+
+.span9{
+ width:96%;
+}
+
 #header{
+  margin: 0 auto 5px;
+  background-color: #0A122A;
+  padding:5px 0;
+  min-width:100%;
+
+  box-shadow: 2px 2px 5px #888888;
+}
+
+#page_name{
 	margin:auto;
 	width:100%;
+        text-align: right;
+	position:relative;
+	animation: mycal 1s;
+	-webkit-animation: mycal 1s; 
+
+
 }
 
 #hr_select, #min_select{
+  -webkit-appearance: none;
   width: 50px;
+  height: 20px;
+  padding: 0px;
+  border: 1px solid #ccc;
 }
+
+#header_table, #header_table span{
+  width: 95%;
+  color: #A9BCF5;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
 
 #cal_table, #cal_table td, #cal_table th {
   border-collapse: collapse;
@@ -37,7 +71,7 @@ $dark_blue: #0B0B3B;
 }
 
 #cal_table td:hover{
-  background-color: $grey_scale_2;
+  background-color: $highlight;
 }
 
 #cal_menu_table tbody{
@@ -80,6 +114,8 @@ $dark_blue: #0B0B3B;
 #event_title, #event_time{
   width: 160px;
 }
+
+
 .dates {
   font-size:10px;
   color: BLACK;
@@ -145,4 +181,14 @@ $dark_blue: #0B0B3B;
 	text-shadow:1px 1px 0px #ffffff;
 }.close_btn:hover {
 	text-shadow:1px 1px 1px $grey_scale_4;
+}
+
+@keyframes mycal
+{
+from  {top: -70px;}
+to {top: 0px;}
+}
+
+@-webkit-keyframes mycal /* Safari and Chrome */
+{
 }
