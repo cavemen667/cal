@@ -68,23 +68,31 @@ function getCell_ID(day){
 function checkWindowSize(isResize){
   var w = $(window).width();
   var h = $(window).height();
-  var w_cell = (w-200)/7;
+  var w_cell = (w-148)/7;
+  if (w>755)
+      w_cell = (w-190)/7;
   var h_cell = (h-360)/6;
 
 
   if (isResize){
-    if (w > 50 && h>50){
-      $('.cells').animate({width: ''+w_cell+'px',
-      height: ''+h_cell+'px'}, 'fast');
-      $('.other_cells').animate({width: ''+w_cell+'px',
-      height: ''+h_cell+'px'}, 'fast');
+if ($(window).width() < 500)
+  $("#header h1").css('display','none');
+else
+  $("#header h1").css('display','inline');
 
-      $('#display_month').animate({width: ''+w_cell+'px'}, 'fast');
+
+    if (w > 50 && h>50){
+      $('.cells').css({width: ''+w_cell+'px',
+      height: ''+h_cell+'px'});
+      $('.other_cells').css({width: ''+w_cell+'px',
+      height: ''+h_cell+'px'});
+
+      $('#display_month').css({width: ''+w_cell+'px'});
     } else if (h > 50) {
-      $('.cells').animate({height: ''+h_cell+'px'},'fast');
-      $('.other_cells').animate({height: ''+h_cell+'px'},'fast');
+      $('.cells').css({height: ''+h_cell+'px'});
+      $('.other_cells').css({height: ''+h_cell+'px'});
     } else if (w > 50) {
-     $('.cells').animate({width: ''+w_cell+'px'}, 'fast');
+     $('.cells').css({width: ''+w_cell+'px'});
     }
   } else {
     if (w > 50){
@@ -254,13 +262,15 @@ $(".dates").parent("td").click(function(e){
 	var y = e.pageY - popup_height/2;
 
 	if($(window).width() < x + popup_width){
-	    x = $(window).width() - popup_width;
+	    x = $(window).width() - popup_width-30;
 	}
 	
 	if(x-popup_width/4 < 0){
 	    x = 0;
 	}
-	
+	if(y > $(window).height()-popup_height){
+	    y = $(window).height() - popup_height-40;
+	}	
 	if(y < 0){
 	    y = 0;
 	}
@@ -278,6 +288,9 @@ $(".dates").parent("td").click(function(e){
     }
 });
 
+
+$(".table_cells").click(function(e){
+});
 
 checkWindowSize(false);
 
